@@ -759,8 +759,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/src \
               -I$(top_srcdir)/third_party/uriparser-0.7.5/include \
               -I$(top_srcdir)/third_party/zlib-1.2.3/contrib
 
-@GCC_TRUE@AM_CXXFLAGS = -Wall -Wextra -Wno-unused-parameter -Werror -pedantic -fno-rtti
-@GCC_TRUE@AM_TEST_CXXFLAGS = -Wall -Wextra -Wno-unused-parameter -Werror -fno-rtti -DGTEST_HAS_RTTI=0
+@GCC_TRUE@AM_CXXFLAGS = -Wall -Wextra -Wno-unused-parameter -fno-rtti
+@GCC_TRUE@AM_TEST_CXXFLAGS = -Wall -Wextra -Wno-unused-parameter -rtti -DGTEST_HAS_RTTI=0
 libkmlbase_la_LDFLAGS = -lexpat
 lib_LTLIBRARIES = libkmlbase.la
 libkmlbase_la_SOURCES = \
