@@ -4430,17 +4430,6 @@ EOF
 	;;
       esac
 
-      case $host in
-      *darwin*)
-        # Don't allow lazy linking, it breaks C++ global constructors
-        if test "$tagname" = CXX ; then
-        compile_command="$compile_command ${wl}-bind_at_load"
-        finalize_command="$finalize_command ${wl}-bind_at_load"
-        fi
-        ;;
-      esac
-
-
       # move library search paths that coincide with paths to not yet
       # installed libraries to the beginning of the library search list
       new_libs=
