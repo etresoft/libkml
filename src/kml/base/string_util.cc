@@ -26,7 +26,7 @@
 // This file contains the declarations of various string utility functions.
 
 #include "kml/base/string_util.h"
-#include <stdlib.h>  // strtod()
+#include <stdlib.h>
 #include <string.h>  // memcpy, strchr
 
 namespace kmlbase {
@@ -84,14 +84,23 @@ void FromString(const string& str, bool* out) {
 template<>
 void FromString(const string& str, double* out) {
   if (out) {
-    *out = strtod(str.c_str(), NULL);
+    std::istringstream iss(str.c_str());
+    iss.imbue(std::locale::classic());
+    iss >> *out;
   }
 }
 
 template<>
 void FromString(const string& str, int* out) {
   if (out) {
-    *out = atoi(str.c_str());
+    if( str.empty()) {
+      *out = 0;
+    }
+    else {
+      std::istringstream iss(str.c_str());
+      iss.imbue(std::locale::classic());
+      iss >> *out;
+    }
   }
 }
 
@@ -102,6 +111,37 @@ void FromString(const string& str, string* out) {
   }
 }
 
+string ToString(bool value) {
+  string ret = "0";
+  if (value)
+    ret = "1";
+  return ret;  
+}
+  
+string ToString(float value) {
+  std::ostringstream ss;
+  ss.imbue(std::locale::classic());
+  ss.precision(8);
+  ss << value; 
+  return ss.str();    
+}
+  
+string ToString(double value) {
+  std::ostringstream ss;
+  ss.imbue(std::locale::classic());
+  ss.precision(15);
+  ss << value; 
+  return ss.str();    
+}
+  
+string ToString(const char *value) {
+  return string(value);
+}
+
+string ToString(string value) {
+  return string(value);
+}
+  
 bool StringEndsWith(const string& str, const string& end) {
   if (str.empty() || end.empty()) {
     return false;
@@ -113,19 +153,25 @@ bool StringEndsWith(const string& str, const string& end) {
 }
 
 bool StringCaseEqual(const string& a, const string& b) {
-#ifdef WIN32
+#if defined(WIN32) && !defined(strncasecmp)
 # define strncasecmp(s1, s2, n) _strnicmp (s1, s2, n)
 #endif
   return a.size() == b.size() && strncasecmp(a.data(), b.data(), a.size()) == 0;
 }
 
+bool StringToDouble(const char* number, double* output) {
+  string s(number);
+  return StringToDouble(s, output);
+}
+  
 bool StringToDouble(const string& number, double* output) {
   if (!IsDecimalDoubleString(number)) {
     return false;
   }
   if (output) {
-    // TODO: consider protobuf's NoLocaleStrtod.
-    *output = strtod(number.c_str(), NULL);
+    std::istringstream iss(number);
+    iss.imbue(std::locale::classic());
+    iss >> *output;
   }
   return true;
 }

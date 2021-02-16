@@ -29,12 +29,8 @@
 #include "boost/scoped_ptr.hpp"
 #include <stdlib.h>
 
-// TODO: fix this for real.
 #ifdef _WIN32
-char* strptime(const char* buf, const char* format, struct tm* tm) {
-  // Not yet implemented on this platform.
-  return NULL;
-}
+extern "C" char* strptime(const char* buf, const char* format, struct tm* tm);
 #endif
 
 namespace kmlbase {
@@ -109,6 +105,9 @@ string DateTime::GetXsdDateTime() const {
 
 // private
 DateTime::DateTime() {
+  //just some date to initialize tm_
+  strptime("14 Nov 1991 12:33:45", "%d %b %Y %H:%M:%S", &tm_);
+  tm_.tm_isdst = -1;
 }
 
 // private

@@ -59,7 +59,11 @@ class XmlFile : public Referent {
   }
 
   bool set_root(const XmlElementPtr& element) {
-    return root_ ? false : (root_ = element, true);
+    if(!root_)
+      return false;
+      
+    root_ = element;
+    return true;
   }
 
   XmlElementPtr FindXmlElementById(const string& id) const {

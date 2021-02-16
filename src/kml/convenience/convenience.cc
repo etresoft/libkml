@@ -148,8 +148,8 @@ LookAtPtr CreateLookAt(double latitude, double longitude, double altitude,
 PointPtr CreatePointFromLatLonAtts(const char** atts) {
   boost::scoped_ptr<Attributes> attributes(Attributes::Create(atts));
   if (attributes.get()) {
-    double latitude;
-    double longitude;
+    double latitude = 0.0;
+    double longitude = 0.0;
     if (attributes->GetValue("lat", &latitude) &&
         attributes->GetValue("lon", &longitude)) {
       return CreatePointLatLon(latitude, longitude);
