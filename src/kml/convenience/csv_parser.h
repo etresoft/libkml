@@ -94,7 +94,7 @@ class CsvParser {
             CsvParserHandler* csv_parser_handler);
 
   // This gets the internal CSV schema.
-  typedef std::map<int, string> CsvSchema;
+  typedef std::map<size_t, string> CsvSchema;
   const CsvSchema& GetSchema() const {
     return csv_schema_;
   }

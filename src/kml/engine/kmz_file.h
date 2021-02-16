@@ -73,7 +73,7 @@ class KmzFile : public kmlbase::Referent {
 
   // Returns the maximum uncompressed file size that the underlying Zip
   // implementation will handle in bytes.
-  unsigned int get_max_uncompressed_file_size();
+  unsigned long get_max_uncompressed_file_size();
 
   // Checks to see if kmz_data looks like a PK ZIP file.
   static bool IsKmz(const string& kmz_data);

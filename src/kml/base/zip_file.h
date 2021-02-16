@@ -62,7 +62,7 @@ class ZipFile {
   void set_max_uncompressed_file_size(unsigned int i) {
     max_uncompressed_file_size_ = i;
   }
-  unsigned int get_max_uncompressed_file_size() {
+  unsigned long get_max_uncompressed_file_size() {
     return max_uncompressed_file_size_;
   }
 

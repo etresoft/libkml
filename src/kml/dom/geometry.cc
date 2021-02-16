@@ -138,7 +138,6 @@ bool Coordinates::ParseVec3(const char* cstr, char** nextp, Vec3* vec) {
     k = 0;
     while (*cstr && *cstr!=',') {
       if( *cstr==' ') {
-	b = 1;  
 	break;
       }
       ++cstr;  ++k;

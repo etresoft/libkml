@@ -77,10 +77,15 @@ static int fseek_calc(ZPOS_T offset, int origin, ZPOS_T* position, ZPOS_T size)
    return bOK ? 0 : -1;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+
 static voidpf ZCALLBACK mem_open OF((
    voidpf opaque,
    const char* filename,
    int mode));
+
+#pragma clang diagnostic pop
 
 static uLong ZCALLBACK mem_read OF((
    voidpf opaque,
@@ -142,7 +147,7 @@ static uLong ZCALLBACK mem_read (opaque, stream, buf, size)
        * tests that exercise this.
        * size = handle->length - handle->position;
       */
-      int size_ = handle->length - handle->position;
+      long size_ = handle->length - handle->position;
       size = (size_ < 0) ? 0 : (uLong)size_;
    }
 
@@ -212,7 +217,6 @@ int ZCALLBACK mem_error (opaque, stream)
    voidpf opaque;
    voidpf stream;
 {
-    MEMFILE *handle = (MEMFILE *)stream;
     /* We never return errors */
     return 0;
 }

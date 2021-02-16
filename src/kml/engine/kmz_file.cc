@@ -80,7 +80,7 @@ void KmzFile::set_max_uncompressed_file_size(unsigned int i) {
   zip_file_->set_max_uncompressed_file_size(i);
 }
 
-unsigned int KmzFile::get_max_uncompressed_file_size() {
+unsigned long KmzFile::get_max_uncompressed_file_size() {
   return zip_file_->get_max_uncompressed_file_size();
 }
 

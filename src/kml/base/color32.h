@@ -44,10 +44,12 @@ class Color32 {
   explicit Color32(int32_t abgr)
     : color_abgr_(static_cast<uint32_t>(abgr)) {
   }
-  Color32(unsigned char a, unsigned char b, unsigned char g, unsigned char r) {
+  Color32(unsigned char a, unsigned char b, unsigned char g, unsigned char r)
+    : color_abgr_(0xffffffff) {
     set_color_abgr((a << 24) | (b << 16) | (g << 8) | r);
   }
-  Color32(const string& value) {
+  Color32(const string& value)
+    : color_abgr_(0xffffffff) {
     set_color_abgr(value);
   }
 

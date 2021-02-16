@@ -189,6 +189,9 @@ local void init_linkedlist(ll)
     ll->first_block = ll->last_block = NULL;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+
 local void free_linkedlist(ll)
     linkedlist_data* ll;
 {
@@ -196,6 +199,7 @@ local void free_linkedlist(ll)
     ll->first_block = ll->last_block = NULL;
 }
 
+#pragma clang diagnostic pop
 
 local int add_data_in_datablock(ll,buf,len)
     linkedlist_data* ll;
@@ -610,6 +614,7 @@ extern zipFile ZEXPORT zipOpen2 (pathname, append, globalcomment, pzlib_filefunc
         if (err!=ZIP_OK)
         {
             ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
+            TRYFREE(zi);
             return NULL;
         }
 
@@ -758,9 +763,9 @@ extern int ZEXPORT zipOpenNewFileInZip3 (file, filename, zipfi,
     zi->ci.flag = 0;
     if ((level==8) || (level==9))
       zi->ci.flag |= 2;
-    if ((level==2))
+    if (level==2)
       zi->ci.flag |= 4;
-    if ((level==1))
+    if (level==1)
       zi->ci.flag |= 6;
     if (password != NULL)
       zi->ci.flag |= 1;
@@ -1052,7 +1057,10 @@ extern int ZEXPORT zipCloseFileInZipRaw (file, uncompressed_size, crc32)
         if (zi->ci.stream.avail_out == 0)
         {
             if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
+                {
                 err = ZIP_ERRNO;
+                break;
+                }
             zi->ci.stream.avail_out = (uInt)Z_BUFSIZE;
             zi->ci.stream.next_out = zi->ci.buffered_data;
         }

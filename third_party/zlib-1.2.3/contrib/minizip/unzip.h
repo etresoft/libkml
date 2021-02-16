@@ -309,7 +309,7 @@ extern int ZEXPORT libkml_unzCloseCurrentFile OF((unzFile file));
 
 extern int ZEXPORT libkml_unzReadCurrentFile OF((unzFile file,
                       voidp buf,
-                      unsigned len));
+                      unsigned long len));
 /*
   Read bytes from the current file (opened by libkml_unzOpenCurrentFile)
   buf contain buffer where data must be copied
