@@ -12,5 +12,5 @@ then
   DEPLOYMENT="IPHONEOS_DEPLOYMENT_TARGET=$IPHONEOS_DEPLOYMENT_TARGET"
 fi
 
-xcodebuild -verbose -configuration $CONFIGURATION -target kml_$PLATFORM archive ARCHS=$ARCH $DEPLOYMENT BOOST_INCLUDE=$PREFIX/boost
+xcodebuild -verbose -configuration $CONFIGURATION -target kml_$PLATFORM archive ARCHS=$ARCH $DEPLOYMENT BOOST_INCLUDE=$PREFIX/include/boost
 
