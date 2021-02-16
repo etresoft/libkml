@@ -2,6 +2,8 @@
 
 PREFIX=$1
 CONFIGURATION=$2
+PLATFORM=$3
+ARCH=$4
 
 mkdir -p $PREFIX/lib
 
@@ -22,3 +24,5 @@ cp src/kml/convenience/*.h $PREFIX/include/kml/convenience
 cp src/kml/engine/*.h $PREFIX/include/kml/engine
 cp src/kml/base/*.h $PREFIX/include/kml/base
 cp src/kml/regionator/*.h $PREFIX/include/kml/regionator
+
+cp libkml.$PLATFORM.$ARCH.pc $PREFIX/lib/pkgconfig/libkml.pc

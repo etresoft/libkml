@@ -1,0 +1,7 @@
+Name: libkml
+Description: Google KML library
+Url: http://www.google.com/
+Version: 1.3.0
+Requires: 
+Cflags: -I/Users/jdaniel/Programming/ES-GIS/platforms/iphoneos/arm64/include
+Libs: -L/Users/jdaniel/Programming/ES-GIS/platforms/iphoneos/arm64/lib -lkml
