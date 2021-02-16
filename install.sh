@@ -6,7 +6,7 @@ CONFIGURATION=$2
 mkdir -p $PREFIX/lib
 
 # Copy libraries into $PREFIX
-cp install/lib/libml.a $PREFIX/lib
+cp install/lib/libkml.a $PREFIX/lib
 
 # Copy all headers
 mkdir -p $PREFIX/include/kml/dom
