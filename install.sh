@@ -18,6 +18,7 @@ mkdir -p $PREFIX/include/kml/engine
 mkdir -p $PREFIX/include/kml/base
 mkdir -p $PREFIX/include/kml/regionator
 
+cp src/kml/*.h $PREFIX/include/kml
 cp src/kml/dom/*.h $PREFIX/include/kml/dom
 cp src/kml/xsd/*.h $PREFIX/include/kml/xsd
 cp src/kml/convenience/*.h $PREFIX/include/kml/convenience
